@@ -1,10 +1,41 @@
+import { ObtenerQR } from "@/Services/service";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+type data = {
+  folio: string,
+  password: string
+}
 
 export default function App() {
-  const [folio, setFolio] = useState("");
+  const [folio, setFolio] = useState<string>("");
+  const [respuestaQR, setRespuestaQR] = useState<any>(null)
+
+  const handleQr = async () => {
+
+
+    try {
+      const response = await ObtenerQR({
+        folio: folio,
+        password: "0x22F3774B51FE7625BDAA1724CB2C4572D8FEAB3D4C7671702F852F55EF69BF15"
+      } as any)
+
+
+
+      setRespuestaQR(response)
+
+
+
+    }
+    catch (error: any) {
+      Alert.alert("Error", error);
+    }
+  }
+
+
+
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -18,10 +49,18 @@ export default function App() {
           value={folio}
           onChangeText={setFolio}
         />
+        <View>
 
-        {folio.length > 0 && (
+          <TouchableOpacity onPress={handleQr} style={{ borderRadius: 10, width: 350, height: 50, backgroundColor: 'green', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>Buscar folio</Text>
+          </TouchableOpacity>
+        </View>
+
+        {respuestaQR !== null && (
           <View style={styles.qrContainer}>
-            <QRCode value={folio} size={200} />
+            {respuestaQR === undefined ? <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Folio no existe</Text> :
+              <QRCode value={respuestaQR === undefined ? 'FFFF' : JSON.stringify(respuestaQR)} size={300} />
+            }
           </View>
         )}
       </View>
@@ -57,4 +96,10 @@ const styles = StyleSheet.create({
   qrContainer: {
     marginTop: 20,
   },
+
+  botonQr: {
+    borderRadius: "5",
+    fontWeight: "bold"
+
+  }
 });
