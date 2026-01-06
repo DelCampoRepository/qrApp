@@ -4,7 +4,7 @@
     "slug": "FolioQR",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/delcampo.png",
+    "icon": "./assets/images/logoDelcampo.png",
     "scheme": "miappexpo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -18,15 +18,15 @@
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/delcampo.png"
+      "favicon": "./assets/images/logoDelcampo.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/delcampo.png",
-          "imageWidth": 90,
+          "image": "./assets/images/logoDelcampo.png",
+          "imageWidth": 350,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
