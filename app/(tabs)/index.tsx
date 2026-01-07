@@ -6,9 +6,6 @@ import { ActivityIndicator, Alert, Image, Keyboard, Modal, StyleSheet, Text, Tex
 import QRCode from "react-native-qrcode-svg";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-
-
 type data = {
   folio: string,
   password: string
@@ -20,8 +17,6 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [sinInternet, setSinInternet] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
-
-
 
 
   const fechaHoy = new Date().toLocaleDateString("es-MX", {
@@ -315,7 +310,6 @@ const styles = StyleSheet.create({
   },
   inputContainerFocused: {
     borderColor: "#0f5132",
-
   },
 
 });
